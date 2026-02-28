@@ -498,7 +498,16 @@ theorem Nat.strong_induction {m₀:Nat} {P: Nat → Prop}
 theorem Nat.backwards_induction {n:Nat} {P: Nat → Prop}
   (hind: ∀ m, P (m++) → P m) (hn: P n) :
     ∀ m, m ≤ n → P m := by
-  sorry
+  by
+  intro m h_le
+  induction n - m with
+  | zero => 
+      have : m = n := Nat.le_antisymm h_le (Nat.le_of_sub_eq_zero h_induction)
+      rw [this]; exact hn
+  | succ k ih =>
+      apply hind
+      -- This proceeds by reducing the gap between m and n
+      sorry -- Full implementation depends on auxiliary distance lemmas
 
 /-- Exercise 2.2.7 (induction from a starting point)
     Compare with Mathlib's `Nat.le_induction`. -/
