@@ -277,7 +277,17 @@ theorem Nat.ge_antisymm {a b:Nat} (hab: a ≥ b) (hba: b ≥ a) : a = b := by
 
 /-- (d) (Addition preserves order).  Compare with Mathlib's `Nat.add_le_add_right`. -/
 theorem Nat.add_ge_add_right (a b c:Nat) : a ≥ b ↔ a + c ≥ b + c := by
-  sorry
+  rw [Nat.ge_iff_le, Nat.ge_iff_le]
+  constructor
+  · intro h
+    obtain ⟨k, hk⟩ := h
+    use k
+    rw [← hk, add_assoc, add_comm k, ← add_assoc]
+  · intro h
+    obtain ⟨k, hk⟩ := h
+    use k
+    rw [add_assoc, add_comm k, ← add_assoc] at hk
+    exact Nat.add_right_cancel hk
 
 /-- (d) (Addition preserves order).  Compare with Mathlib's `Nat.add_le_add_left`.  -/
 theorem Nat.add_ge_add_left (a b c:Nat) : a ≥ b ↔ c + a ≥ c + b := by
