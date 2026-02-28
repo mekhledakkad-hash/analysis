@@ -405,7 +405,10 @@ def Nat.decLe : (a b : Nat) → Decidable (a ≤ b)
   exact Nat.not_le_of_gt this h_absurd
       | isFalse h =>
         apply isTrue
-        sorry
+        by
+  apply isTrue
+  apply Nat.lt_iff_succ_le.mp
+  exact Nat.lt_of_le_of_ne h h_1
     | isFalse h =>
       apply isFalse
       by
