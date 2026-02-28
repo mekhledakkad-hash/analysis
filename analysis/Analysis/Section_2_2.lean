@@ -398,7 +398,11 @@ def Nat.decLe : (a b : Nat) → Decidable (a ≤ b)
       cases decEq a b with
       | isTrue h =>
         apply isFalse
-        sorry
+        by
+  intro h_absurd
+  have : a++ > a := Nat.succ_gt_self a
+  have : a++ > b := by rw [← h]; exact this
+  exact Nat.not_le_of_gt this h_absurd
       | isFalse h =>
         apply isTrue
         sorry
