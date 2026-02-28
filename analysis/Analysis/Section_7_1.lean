@@ -231,7 +231,8 @@ theorem map_finite_series {X:Type*} [Fintype X] [Fintype Y] (f: X → ℝ) {g:Y 
 
 /-- Proposition 7.1.11(e) / Exercise 7.1.2 -/
 theorem finite_series_of_disjoint_union {Z:Type*} {X Y: Finset Z} (hdisj: Disjoint X Y) (f: Z → ℝ) :
-    ∑ z ∈ X ∪ Y, f z = ∑ z ∈ X, f z + ∑ z ∈ Y, f z := by sorry
+    ∑ z ∈ X ∪ Y, f z = ∑ z ∈ X, f z + ∑ z ∈ Y, f z := by
+  exact Finset.sum_union hdisj
 
 /-- Proposition 7.1.11(f) / Exercise 7.1.2 -/
 theorem finite_series_of_add {X':Type*} (f g: X' → ℝ) (X: Finset X') :
