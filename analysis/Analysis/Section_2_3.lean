@@ -77,7 +77,10 @@ lemma Nat.mul_succ (n m:Nat) : n * m++ = n * m + n := by
 /-- Lemma 2.3.2 (Multiplication is commutative) / Exercise 2.3.1
 Compare with Mathlib's `Nat.mul_comm` -/
 lemma Nat.mul_comm (n m: Nat) : n * m = m * n := by
-  sorry
+  by
+  induction n with
+  | zero => rw [zero_mul, mul_zero]
+  | succ n ih => rw [succ_mul, ih, mul_succ]
 
 /-- Compare with Mathlib's `Nat.mul_one` -/
 theorem Nat.mul_one (m: Nat) : m * 1 = m := by
