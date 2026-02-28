@@ -288,7 +288,7 @@ theorem finite_series_of_finite_series {XX YY:Type*} (X: Finset XX) (Y: Finset Y
       simp at hz ⊢; grind
     _ = _ := by
       symm; convert finite_series_of_disjoint_union _ _
-      . sorry
+      . aesop (add simp [finite_series_of_add, hn, hdisj])
       sorry
 
 /-- Corollary 7.1.14 (Fubini's theorem for finite series)-/
