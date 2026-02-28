@@ -327,7 +327,8 @@ theorem binomial_theorem (x y:ℝ) (n:ℕ) :
     (x + y)^n
     = ∑ j ∈ Icc (0:ℤ) n,
     n.factorial / (j.toNat.factorial * (n-j).toNat.factorial) * x^j * y^(n - j) := by
-  sorry
+  by
+  exact add_pow x y n
 
 /-- Exercise 7.1.5 -/
 theorem lim_of_finite_series {X:Type*} [Fintype X] (a: X → ℕ → ℝ) (L : X → ℝ)
