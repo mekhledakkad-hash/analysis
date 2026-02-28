@@ -83,7 +83,9 @@ theorem concat_finite_series {m n p:ℤ} (hmn: m ≤ n+1) (hpn : n ≤ p) (a: �
 
 /-- Lemma 7.1.4(b) / Exercise 7.1.1 -/
 theorem shift_finite_series {m n k:ℤ} (a: ℤ → ℝ) :
-  ∑ i ∈ Icc m n, a i = ∑ i ∈ Icc (m+k) (n+k), a (i-k) := by sorry
+  ∑ i ∈ Icc m n, a i = ∑ i ∈ Icc (m+k) (n+k), a (i-k) := by
+  rw [mul_comm, ← mul_assoc]
+  simp [mul_comm]
 
 /-- Lemma 7.1.4(c) / Exercise 7.1.1 -/
 theorem finite_series_add {m n:ℤ} (a b: ℤ → ℝ) :
