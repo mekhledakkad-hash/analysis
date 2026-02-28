@@ -77,7 +77,7 @@ theorem shift_finite_series {m n k:ℤ} (a: ℤ → ℝ) :
 
 /-- Lemma 7.1.4(c) / Exercise 7.1.1 -/
 theorem finite_series_add {m n:ℤ} (a b: ℤ → ℝ) :
-  ∑ i ∈ Icc m n, (a i + b i) = ∑ i ∈ Icc m n, a i + ∑ i ∈ Icc m n, b i := by sorry
+  ∑ i ∈ Icc m n, (a i + b i) = ∑ i ∈ Icc m n, a i + ∑ i ∈ Icc m n, b i := exact Finset.sum_add_distrib
 
 /-- Lemma 7.1.4(d) / Exercise 7.1.1 -/
 theorem finite_series_const_mul {m n:ℤ} (a: ℤ → ℝ) (c:ℝ) :
