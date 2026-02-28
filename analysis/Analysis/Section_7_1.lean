@@ -212,7 +212,7 @@ theorem finite_series_of_empty {X':Type*} (f: X' → ℝ) : ∑ i ∈ ∅, f i =
 
 /-- Proposition 7.1.11(b) / Exercise 7.1.2 -/
 theorem finite_series_of_singleton {X':Type*} (f: X' → ℝ) (x₀:X') : ∑ i ∈ {x₀}, f i = f x₀ := by
-  sorry
+  simp
 
 /--
   A technical lemma relating a sum over a finset with a sum over a fintype. Combines well with
