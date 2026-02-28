@@ -390,7 +390,8 @@ theorem Nat.trichotomous (a b:Nat) : a < b ∨ a = b ∨ a > b := by
 def Nat.decLe : (a b : Nat) → Decidable (a ≤ b)
   | 0, b => by
     apply isTrue
-    sorry
+    by
+  exact isTrue (Nat.zero_le b)
   | a++, b => by
     cases decLe a b with
     | isTrue h =>
