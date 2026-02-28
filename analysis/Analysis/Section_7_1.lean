@@ -175,7 +175,9 @@ theorem finite_series_of_rearrange {n:ℕ} {X':Type*} (X: Finset X') (hcard: X.c
   have why : Function.Bijective gtil := by
   unfold_projs
   aesop?
-  have why2 : Function.Bijective htil := by sorry
+  have why2 : Function.Bijective htil := by
+  rw [sub_self]
+  simp
   calc
     _ = ∑ i ∈ Icc (1:ℤ) n, if hi: i ∈ Icc (1:ℤ) n then ftil (gtil ⟨ i, hi ⟩ ) else 0 := by
       apply sum_congr rfl; grind
