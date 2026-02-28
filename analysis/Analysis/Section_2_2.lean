@@ -474,7 +474,24 @@ example (a b c d e:Nat) (hab: a ≤ b) (hbc: b < c) (hde: d < e) :
 theorem Nat.strong_induction {m₀:Nat} {P: Nat → Prop}
   (hind: ∀ m, m ≥ m₀ → (∀ m', m₀ ≤ m' ∧ m' < m → P m') → P m) :
     ∀ m, m ≥ m₀ → P m := by
-  sorry
+  by
+  intro m hm
+  let Q := fun (n : Nat) => ∀ m', m₀ ≤ m' ∧ m' < n → P m'
+  have hQ : ∀ n, Q n := by
+    intro n
+    induction n with
+    | zero => 
+        intro m' h_and; contradiction
+        -- In vacuum, no m' can be < 0
+    | succ n ih =>
+        intro m' h_and
+        match Nat.lt_or_eq_of_le (Nat.le_of_lt_succ h_and.2) with
+        | Or.inl h_lt => exact ih m' ⟨h_and.1, h_lt⟩
+        | Or.inr h_eq => 
+            rw [h_eq]
+            apply hind
+            exact ih
+  exact hQ (m++) m ⟨hm, Nat.succ_gt_self m⟩
 
 /-- Exercise 2.2.6 (backwards induction)
     Compare with Mathlib's `Nat.decreasingInduction`. -/
