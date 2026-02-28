@@ -507,7 +507,13 @@ theorem Nat.backwards_induction {n:Nat} {P: Nat → Prop}
   | succ k ih =>
       apply hind
       -- This proceeds by reducing the gap between m and n
-      sorry -- Full implementation depends on auxiliary distance lemmas
+      have : m + k < n := by
+        rw [← h_induction]
+        apply Nat.add_lt_add_left
+        exact Nat.lt_succ_self k
+      have : P (m + k + 1) := ih
+      rw [Nat.add_assoc, Nat.add_one] at this
+      exact hind (m + k) this -- Full implementation depends on auxiliary distance lemmas
 
 /-- Exercise 2.2.7 (induction from a starting point)
     Compare with Mathlib's `Nat.le_induction`. -/
