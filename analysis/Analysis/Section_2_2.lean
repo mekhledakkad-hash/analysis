@@ -302,7 +302,18 @@ theorem Nat.add_le_add_left (a b c:Nat) : a ≤ b ↔ c + a ≤ c + b := add_ge_
 
 /-- (e) a < b iff a++ ≤ b.  Compare with Mathlib's `Nat.succ_le_iff`. -/
 theorem Nat.lt_iff_succ_le (a b:Nat) : a < b ↔ a++ ≤ b := by
-  sorry
+  rw [Nat.lt_iff, Nat.le_iff]
+  constructor
+  · intro h
+    obtain ⟨k, hk, hpos⟩ := h
+    obtain ⟨k', hk'⟩ := hpos
+    use k'
+    rw [← hk, hk', Nat.succ_eq_add_one, add_assoc, add_comm 1]
+  · intro h
+    obtain ⟨k, hk⟩ := h
+    use k + 1
+    rw [Nat.succ_eq_add_one, ← add_assoc, hk]
+    simp
 
 /-- (f) a < b if and only if b = a + d for positive d. -/
 theorem Nat.lt_iff_add_pos (a b:Nat) : a < b ↔ ∃ d:Nat, d.IsPos ∧ b = a + d := by
