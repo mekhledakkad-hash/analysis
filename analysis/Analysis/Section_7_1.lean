@@ -224,7 +224,8 @@ theorem finite_series_of_fintype {X':Type*} (f: X' → ℝ) (X: Finset X') :
 /-- Proposition 7.1.11(c) / Exercise 7.1.2 -/
 theorem map_finite_series {X:Type*} [Fintype X] [Fintype Y] (f: X → ℝ) {g:Y → X}
   (hg: Function.Bijective g) :
-    ∑ x, f x = ∑ y, f (g y) := by sorry
+    ∑ x, f x = ∑ y, f (g y) := by
+  exact hg.sum_comp _
 
 -- Proposition 7.1.11(d) is `rfl` in our formalism and is therefore omitted.
 
