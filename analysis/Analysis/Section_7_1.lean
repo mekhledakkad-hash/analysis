@@ -289,7 +289,8 @@ theorem finite_series_of_finite_series {XX YY:Type*} (X: Finset XX) (Y: Finset Y
     _ = _ := by
       symm; convert finite_series_of_disjoint_union _ _
       . aesop (add simp [finite_series_of_add, hn, hdisj])
-      sorry
+      by
+  aesop (add simp [finite_series_of_add, finite_series_of_singleton, hn, hdisj])
 
 /-- Corollary 7.1.14 (Fubini's theorem for finite series)-/
 theorem finite_series_refl {XX YY:Type*} (X: Finset XX) (Y: Finset YY) (f: XX × YY → ℝ) :
