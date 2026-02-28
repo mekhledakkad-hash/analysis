@@ -334,7 +334,8 @@ theorem binomial_theorem (x y:ℝ) (n:ℕ) :
 theorem lim_of_finite_series {X:Type*} [Fintype X] (a: X → ℕ → ℝ) (L : X → ℝ)
   (h: ∀ x, Filter.atTop.Tendsto (a x) (nhds (L x))) :
     Filter.atTop.Tendsto (fun n ↦ ∑ x, a x n) (nhds (∑ x, L x)) := by
-  sorry
+  by
+  exact tendsto_finset_sum _ h
 
 /-- Exercise 7.1.6 -/
 theorem sum_union_disjoint {n : ℕ} {S : Type*} [Fintype S]
