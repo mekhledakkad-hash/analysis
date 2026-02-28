@@ -373,7 +373,9 @@ theorem Nat.trichotomous (a b:Nat) : a < b ∨ a = b ∨ a > b := by
   rw [Nat.gt_iff_lt] at case3 ⊢
   exact Nat.lt_trans case3 (Nat.succ_gt_self a)
     tauto
-  have why : a++ > b := by sorry
+  have why : a++ > b := by
+  rw [case2]
+  exact Nat.succ_gt_self b
   tauto
 
 /--
