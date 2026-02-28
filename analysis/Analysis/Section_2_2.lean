@@ -513,7 +513,12 @@ theorem Nat.backwards_induction {n:Nat} {P: Nat → Prop}
     Compare with Mathlib's `Nat.le_induction`. -/
 theorem Nat.induction_from {n:Nat} {P: Nat → Prop} (hind: ∀ m, P m → P (m++)) :
     P n → ∀ m, m ≥ n → P m := by
-  sorry
+  by
+  intro m h_le
+  induction n, m using Nat.rec_of_le_of_decreasing with
+  | h_base => exact hn
+  | h_step k h_le_k ih => exact hind k ih
+  | h_le => exact h_le
 
 
 
