@@ -206,7 +206,15 @@ instance Nat.isOrderedRing : IsOrderedRing Nat where
   rw [le_iff_lt_or_eq]
   left
   exact Nat.zero_lt_one
-  mul_le_mul_of_nonneg_left := by sorry
+  mul_le_mul_of_nonneg_left := by
+  induction c with
+  | zero => 
+    rw [mul_zero, mul_zero]
+    exact le_refl 0
+  | succ c ih => 
+    rw [mul_succ, mul_succ]
+    apply Nat.add_le_add ih
+    exact h
   mul_le_mul_of_nonneg_right := by sorry
 
 /-- This illustration of the `gcongr` tactic is not from the
