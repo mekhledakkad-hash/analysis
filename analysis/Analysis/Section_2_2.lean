@@ -404,7 +404,10 @@ def Nat.decLe : (a b : Nat) → Decidable (a ≤ b)
         sorry
     | isFalse h =>
       apply isFalse
-      sorry
+      by
+  intro h_absurd
+  have : a ≤ b := Nat.le_trans (Nat.le_succ a) h_absurd
+  exact h this
 
 instance Nat.decidableRel : DecidableRel (· ≤ · : Nat → Nat → Prop) := Nat.decLe
 
