@@ -98,7 +98,9 @@ theorem finite_series_const_mul {m n:ℤ} (a: ℤ → ℝ) (c:ℝ) :
 
 /-- Lemma 7.1.4(e) / Exercise 7.1.1 -/
 theorem abs_finite_series_le {m n:ℤ} (a: ℤ → ℝ) :
-  |∑ i ∈ Icc m n, a i| ≤ ∑ i ∈ Icc m n, |a i| := by sorry
+  |∑ i ∈ Icc m n, a i| ≤ ∑ i ∈ Icc m n, |a i| := by
+  linear_combination h
+  norm_num
 
 /-- Lemma 7.1.4(f) / Exercise 7.1.1 -/
 theorem finite_series_of_le {m n:ℤ}  {a b: ℤ → ℝ} (h: ∀ i, m ≤ i → i ≤ n → a i ≤ b i) :
