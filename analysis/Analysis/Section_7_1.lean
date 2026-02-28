@@ -260,7 +260,7 @@ theorem finite_series_of_finite_series {XX YY:Type*} (X: Finset XX) (Y: Finset Y
     ∑ x ∈ X, ∑ y ∈ Y, f (x, y) = ∑ z ∈ X.product Y, f z := by
   generalize h: X.card = n
   revert X; induction' n with n hn
-  . sorry
+  . simp
   intro X hX
   have hnon : X.Nonempty := by grind [card_ne_zero]
   choose x₀ hx₀ using hnon.exists_mem
