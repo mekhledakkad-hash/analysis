@@ -215,7 +215,10 @@ instance Nat.isOrderedRing : IsOrderedRing Nat where
     rw [mul_succ, mul_succ]
     apply Nat.add_le_add ih
     exact h
-  mul_le_mul_of_nonneg_right := by sorry
+  mul_le_mul_of_nonneg_right := by
+  rw [mul_comm a c, mul_comm b c]
+  apply mul_le_mul_of_nonneg_left
+  exact h
 
 /-- This illustration of the `gcongr` tactic is not from the
     textbook. -/
