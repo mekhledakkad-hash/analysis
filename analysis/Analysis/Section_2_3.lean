@@ -100,7 +100,23 @@ lemma Nat.pos_mul_pos {n m: Nat} (h₁: n.IsPos) (h₂: m.IsPos) : (n * m).IsPos
 /-- Lemma 2.3.3 (Positive natural numbers have no zero divisors) / Exercise 2.3.2.
     Compare with Mathlib's `Nat.mul_eq_zero`.  -/
 lemma Nat.mul_eq_zero (n m: Nat) : n * m = 0 ↔ n = 0 ∨ m = 0 := by
-  sorry
+  by
+  induction n with
+  | zero => left; rfl
+  | succ n ih =>
+      right
+      cases m with
+      | zero => rfl
+      | succ m =>
+          have h_pos : (n.succ * m.succ).IsPos := by
+            apply Nat.pos_mul_pos
+            . exact Nat.succ_pos n
+            . exact Nat.succ_pos m
+          have h_zero : (n.succ * m.succ) = 0 := h
+          have : ¬(n.succ * m.succ).IsPos := by
+            rw [h_zero]
+            exact Nat.not_zero_isPos
+          contradiction
 
 /-- Proposition 2.3.4 (Distributive law)
 Compare with Mathlib's `Nat.mul_add` -/
