@@ -354,6 +354,8 @@ theorem sum_union_disjoint {n : ℕ} {S : Type*} [Fintype S]
   the bound is baked into the type, and `<` replaces `≤` to match the 0-indexed shift. -/
 theorem sum_finite_col_row_counts {n m : ℕ} (a : Fin n → Fin m) :
     ∑ i, (a i : ℕ) = ∑ j : Fin m, {i : Fin n | j < a i}.toFinset.card := by
-  sorry
+  rw [← Finset.sum_card_fiberwise]
+  · simp
+  · intro i; simp
 
 end Finset
