@@ -263,7 +263,17 @@ theorem Nat.le_trans {a b c:Nat} (hab: a ≤ b) (hbc: b ≤ c) : a ≤ c := Nat.
 
 /-- (c) (Order is anti-symmetric). Compare with Mathlib's `Nat.le_antisymm`. -/
 theorem Nat.ge_antisymm {a b:Nat} (hab: a ≥ b) (hba: b ≥ a) : a = b := by
-  sorry
+  rw [Nat.ge_iff_le] at hab hba
+  obtain ⟨k1, hk1⟩ := hab
+  obtain ⟨k2, hk2⟩ := hba
+  have h_sum : b + (k2 + k1) = b + 0 := by
+    rw [add_zero]
+    rw [← hk1] at hk2
+    rw [add_assoc] at hk2
+    exact hk2
+  have k_zero : k2 + k1 = 0 := Nat.add_left_cancel h_sum
+  have : k1 = 0 := Nat.add_eq_zero_iff.mp k_zero |>.2
+  rw [← hk1, this, add_zero]
 
 /-- (d) (Addition preserves order).  Compare with Mathlib's `Nat.add_le_add_right`. -/
 theorem Nat.add_ge_add_right (a b c:Nat) : a ≥ b ↔ a + c ≥ b + c := by
