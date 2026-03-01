@@ -1022,8 +1022,14 @@ theorem AlmostEverywhereEqual.equivalence {d:ℕ} {X: Type*} :
 
 /-- Exercise 1.3.1 (i) (Unsigned linearity) -/
 lemma UnsignedSimpleFunction.integral_add {d:ℕ} {f g: EuclideanSpace' d → EReal} (hf: UnsignedSimpleFunction f) (hg: UnsignedSimpleFunction g) :
-  (hf.add hg).integ = hf.integ + hg.integ := by
-  by
+  (hf.add hg).integ = hf.integ + hg.integ := /-- Exercise 1.3.1 (i) (Homogeneity) -/
+lemma UnsignedSimpleFunction.integral_smul {d:N} {f : EuclideanSpace' d → EReal} 
+  (hf: UnsignedSimpleFunction f) (c : EReal) (hc : 0 ≤ c) :
+  (hf.smul hc).integ = c * hf.integ := by
+  simp [UnsignedSimpleFunction.integ]
+  rw [← Finset.sum_mul_distrib]
+  congr ; ext x
+  rw [UnsignedSimpleFunction.coeff_smul, ENNReal.mul_assoc]
   rw [UnsignedSimpleFunction.integral]
   rw [UnsignedSimpleFunction.integral, UnsignedSimpleFunction.integral]
   simp only [UnsignedSimpleFunction.add_apply]
