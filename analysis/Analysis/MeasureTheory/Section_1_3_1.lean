@@ -511,8 +511,10 @@ lemma weightedMeasureSum_eq_of_eq {d k k' : ℕ}
       have hx_in : x ∈ E i := (hmem_E n x hx i).mpr h
       exact indicator_mul_mem (E i) (c i) x hx_in
     · simp only [h]
-      have hx_out : x ∉ E i := fun hc => h ((hmem_E n x hx i).mp hc)
-      exact indicator_mul_not_mem (E i) (c i) x hx_out
+      have hx_out : x ∉ E i := by 
+        intro hc
+        exact h (hmem_E n x hx i).mp hc
+      rw [indicator_mul_not_mem (E i) (c i) hx_out]
 
   have hsum_simp' : ∀ n : Fin (2^(k+k')), ∀ x ∈ atom E E' n,
       ∑ i : Fin k', (c' i) * (EReal.indicator (E' i) x) = ∑ i : Fin k', if atomMembership k k' n (k + i) then c' i else 0 := by
