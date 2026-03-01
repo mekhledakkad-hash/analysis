@@ -571,8 +571,14 @@ lemma weightedMeasureSum_eq_of_eq {d k k' : ℕ}
       by_cases h1 : atomMembership k k' i₁ i <;> by_cases h2 : atomMembership k k' i₂ i
       · simp only [h1, h2, ite_true]
         exact atom_pairwiseDisjoint E E' (by trivial : i₁ ∈ Set.univ) (by trivial) hi
-      · simp only [h1, h2, ite_true]
-        rw [Set.disjoint_left]; intro _ _; simp
+      have hEi : E i = ⋃ j ∈ {j | x ∈ A j}, A j := by
+        ext y
+        simp only [mem_iUnion, mem_setOf_eq, exists_prop]
+        constructor
+        · intro hy
+          exact ⟨i, ⟨h_Ei_mem_Ai i hy, hy⟩⟩
+        · rintro ⟨j, hj_cond, hyA⟩
+          exact (h_Ai_subset_Ei j) hyA
       · simp only [h1, h2, ite_true]
         rw [Set.disjoint_left]; simp
       · simp only [h1, h2]
