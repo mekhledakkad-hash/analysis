@@ -527,13 +527,14 @@ lemma weightedMeasureSum_eq_of_eq {d k k' : ℕ}
       have hx_out : x ∉ E' i := fun hc => h ((hmem_E' n x hx i).mp hc)
       exact indicator_mul_not_mem (E' i) (c' i) x hx_out
 
-  -- Step 4: For non-empty atoms, the bit-pattern sums are equal
-  have hbit_eq : ∀ n : Fin (2^(k+k')), (atom E E' n).Nonempty →
-      (∑ i : Fin k, if atomMembership k k' n i = true then c i else 0 : EReal) =
-      (∑ i : Fin k', if atomMembership k k' n (k + i) = true then c' i else 0 : EReal) := by
-    intro n ⟨x, hx⟩
-    rw [← hsum_simp n x hx, ← hsum_simp' n x hx]
-    exact hpoint n x hx
+  -- Step 4: -- Step 4: reconstruct the function from its atomic indicator components
+  have h_sum : (∑ i in Finset.range n, (c i) * (indicator (E i) x)) = f x := by
+    rw [← Finset.sum_mul]
+    have hx_sum : (∑ i in Finset.range n, indicator (E i) x) = 1 := by
+      rw [sum_indicator_apply_eq_one]
+      exact hmem_E n x hx
+    rw [hx_sum, mul_one]
+  exact h_sum
 
   -- Step 5: E_i = union of atoms where bit i = 1
   have hE_decomp : ∀ i : Fin k, E i = ⋃ n ∈ {n : Fin (2^(k+k')) | atomMembership k k' n i}, atom E E' n :=
